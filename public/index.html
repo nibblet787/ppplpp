@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>PPPLPP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/skeleton.css">
+    <link rel="stylesheet" href="./css/styles.css">
+  </head>
+  <body ng-controller="PotluckController as ctrl">
+    <div class="sidenav">
+      <a href="#">About</a>
+      <a href="#">Organize A Party</a>
+      <a href="#">Guests</a>
+      <!-- <a href="#">Contact</a> -->
+    </div>
+    <div class="main_right">
+      <header>
+        <h1>Potent Potables Potluck Party Planner</h1>
+        <nav class='headerNav'>
+          <a ng-click="ctrl.logout()" class="button button-primary" ng-if='ctrl.showWhenLoggedIn'>Logout</a>
+          <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.toggleLogin()" class="button button-primary" href="#" >Login</a>
+          <a ng-click="ctrl.toggleCreate()" class="button button-primary" href="#" >Create User</a>
+        </nav>
+      </header>
+    </div>
+  </body>
+</html>
