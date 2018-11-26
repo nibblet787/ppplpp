@@ -3,7 +3,7 @@
 // =======================================
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 // =======================================
 //              DATABASE
@@ -17,15 +17,15 @@ const guestsSeeds = require ('../models/seed.js');
 // =======================================
 
 /************* Guest Create Route***********************/
-router.post('/', (req, res)=>{
-    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    Guests.create(req.body, (err, createdGuest)=>{
-        res.status(201).json({
-            status:201,
-            message:'guest created'
-        })
-    });
-});
+// router.post('/', (req, res)=>{
+//     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+//     Guests.create(req.body, (err, createdGuest)=>{
+//         res.status(201).json({
+//             status:201,
+//             message:'guest created'
+//         })
+//     });
+// });
 
 /************* Index Route***********************/
 router.get('/', (req, res)=>{
