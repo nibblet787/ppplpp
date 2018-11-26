@@ -64,3 +64,27 @@ app.use(express.urlencoded({extended:false}));
 //              STATIC
 // =======================================
 app.use(express.static('public'));
+
+// =======================================
+//              CONTROLLERS
+// =======================================
+const guestsController = require('./controllers/guests.js')
+app.use('/guests', guestsController)
+
+const sessionsController = require('./controllers/sessions.js')
+app.use('/sessions', sessionsController)
+
+const usersController = require('./controllers/users.js')
+app.use('/users', usersController);
+
+// =======================================
+//            ROUTES
+// =======================================
+
+app.get('/', (req, res)=>{
+  res.send('Hello world');
+});
+
+app.listen(PORT, () => {
+  console.log('PPPLPP app listening on port: '+PORT)
+});
