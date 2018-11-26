@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Hosts = require('../models/hosts.js');
+const User = require('../models/users.js');
 const Guests = require('../models/guests.js');
 const bcrypt = require('bcrypt');
 
@@ -18,7 +18,7 @@ router.delete('/', (req, res)=>{
 });
 
 router.post('/', (req, res)=>{
-    Hosts.findOne({hostname:req.body.hostname}, (err, foundHost)=>{
+    User.findOne({username:req.body.username}, (err, foundHost)=>{
         if(bcrypt.compareSync(req.body.password, foundHost.password)){
             req.session.currentHost = foundHost;
             res.status(201).json({
