@@ -1,7 +1,7 @@
 module.exports = [
   {
-  host: false,
-  hostName: 'South America',
+  host: true,
+  hostName: ,
   hostDate: ,
   name: 'Jim Jones',
   food: 'Kool-aid',
