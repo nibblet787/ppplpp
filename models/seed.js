@@ -1,8 +1,8 @@
 module.exports = [
   {
     host: true,
-    hostName: ,
-    hostDate: ,
+    hostName: 'n/a',
+    hostDate: 'n/a',
     name: 'Jim Jones',
     food: 'Kool-aid',
     recipeUrl: 'https://goo.gl/gjxsfn',
@@ -14,8 +14,8 @@ module.exports = [
   },
   {
     host: true,
-    hostName: ,
-    hostDate: ,
+    hostName: 'n/a',
+    hostDate: 'n/a',
     name: 'Marie Antoinette',
     food: 'Peasant Cake',
     recipeUrl: 'https://goo.gl/Jo61hS',
@@ -28,7 +28,7 @@ module.exports = [
   {
     host: false,
     hostName: 'Athens',
-    hostDate: ,
+    hostDate: 'n/a',
     name: 'Socrates',
     food: 'Hemlock',
     recipeUrl: 'https://goo.gl/2l6fa',
