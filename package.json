@@ -1,0 +1,27 @@
+{
+  "name": "ppplpp",
+  "version": "1.0.0",
+  "description": "An app for organizing a potluck party, with features such as letting guests state their intended meal contribution, whether or not it needs to be placed in the oven, a link to the meal's online recipe, number of +1's attending, etc...",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nibblet787/ppplpp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nibblet787/ppplpp/issues"
+  },
+  "homepage": "https://github.com/nibblet787/ppplpp#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.3.13",
+    "nodemon": "^1.18.6"
+  }
+}
