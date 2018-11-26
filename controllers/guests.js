@@ -9,8 +9,8 @@ const bcrypt = require('bcrypt');
 //              DATABASE
 // =======================================
 const Guests = require('../models/guests.js');
-const Hosts = require('../models/hosts.js');
-const guestsSeeds = require ('../models/seed.js');
+const User = require('../models/users.js');
+// const guestsSeeds = require ('../models/seed.js');
 
 // =======================================
 //              ROUTES
