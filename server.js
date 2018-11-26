@@ -74,8 +74,8 @@ app.use('/guests', guestsController)
 const sessionsController = require('./controllers/sessions.js')
 app.use('/sessions', sessionsController)
 
-const usersController = require('./controllers/users.js')
-app.use('/users', usersController);
+const hostsController = require('./controllers/hosts.js')
+app.use('/hosts', hostsController);
 
 // =======================================
 //            ROUTES
