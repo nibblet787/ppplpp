@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const guestSchema = new mongoose.Schema({
   host:{type: Boolean, default: false},
   hostName:{type: String},
-  hostDate:{type: Date},
+  hostDate:{type: Number},
   name:{type: String, required:true},
   food:{type: String, required:true},
   recipeUrl:{type: String},

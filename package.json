@@ -4,7 +4,8 @@
   "description": "An app for organizing a potluck party, with features such as letting guests state their intended meal contribution, whether or not it needs to be placed in the oven, a link to the meal's online recipe, number of +1's attending, etc...",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,6 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "mongoose": "^5.3.13",
-    "nodemon": "^1.18.6"
+    "mongoose": "^5.3.13"
   }
 }
