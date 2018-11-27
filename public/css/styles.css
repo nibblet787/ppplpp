@@ -1,23 +1,71 @@
-body {
-  background-color: rgba(254, 236, 115, 0.65);
+@font-face {
+  font-family: "sushi";
+  src: url("../fonts/Sushi_Omelette_DEMO.ttf") format('truetype');
+}
 
+@font-face {
+  font-family: "Beauty";
+  src: url("../fonts/Beauty_Mountains_Personal_Use.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: "love";
+  src: url('../fonts/BiggerLove-DEMO.ttf') format('truetype');
+}
+
+h1 {
+  font-family: "love", cursive;
+  letter-spacing: 5px;
+  color: rgb(223, 254, 232);
+  text-shadow: 5px 2px 5px black;
+  font-size: 50px;
+  text-align: center;
+}
+
+h3 {
+  font-family: "love", cursive;
+  text-align: center;
+}
+
+em {
+  font-size: 70px;
+  line-height: 100%;
+}
+
+body {
+  background-color: rgb(128, 82, 16);
 }
 
 .container {
-  /* position: fixed; */
+  background-color: rgba(254, 218, 167, 1);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  position: relative;
+  top: 0;
+  /* left: 50%;
+  right: 50%; */
 }
 
 .bg {
-  width: 100%;
-  height: 200px;
+  width: 95%;
+  height: 250px;
   display: block;
   position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  margin-bottom: 50px;
+
 }
 
 .bg:after {
   content: "";
   background: url('https://i.imgur.com/t9QcniW.jpg');
-  opacity: 0.7;
+  opacity: 0.8;
   top: 0;
   left: 0;
   bottom: 0;
@@ -25,26 +73,75 @@ body {
   position: absolute;
   z-index: -1;
   background-repeat: no-repeat;
-  margin: 0 auto;
+  margin: 0;
 }
 
-.sidenav {
-    height: 100%;
-    width: 150px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: rgb(129, 82, 1);
-    /* overflow-x: hidden; */
-    padding-top: 20px;
-    /* margin-top: 150px; */
+a {
+  text-decoration: none;
+  /* color: black; */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.headerNav {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  width: 100%;
+  background-color: rgb(223, 254, 232);
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.createFind {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.createParty, .findParty {
+    display: flex;
+    flex-direction: column;
+    border: 5px solid black;
+    border-radius: 5px;
+    width: 35%;
+    background-color: white;
+    padding: 10px;
+    /* margin: 50px; */
+}
+
+.findInput {
+  display: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 5px;
+  margin-top: 5px;
+  width: 10px;
+}
+
+.create {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(128, 82, 16);
+  color: white;
+
 }
 
 .guests {
-  width: 100%;
+  position: relative;
+  column-count: 3;
+  width: 65%;
   border: 5px solid black;
-
+  border-radius: 5px;
   margin: 10px auto;
 }
 
@@ -53,12 +150,48 @@ body {
   /* animation: mymove 5s 1; */
 }
 
+.del {
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.edit {
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 2rem;
+  width: 20px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.del:hover, .edit:hover, .closeButton:hover, .logout:hover {
+  cursor: pointer;
+}
+/* .guestInfo {
+  display: flex;
+  flex-direction: column;
+} */
+
+li {
+  list-style: none;
+}
+
 @keyframes mymove {
     50% {box-shadow: 10px 20px 30px rgba(92, 91, 91, 1);}
 }
 
 .profilePic {
-  margin: 10px;
-  width: 10%;
+  margin: 10px 0 0 10px;
+  width: 70px;
   border-radius: 20px;
+}
+
+.login {
+  background-color: white;
 }
