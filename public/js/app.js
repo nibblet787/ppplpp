@@ -50,19 +50,19 @@ app.controller('PotluckController', ['$http', function($http){
         peanutFree: this.peanutFree
       }
     }).then(function(response){
-        this.host = false;
-        this.hostName = "";
-        this.hostDate = "";
-        this.name = "";
-        this.food = "";
-        this.recipeUrl = "";
-        this.profilePic = "";
-        this.needOven = false;
-        this.attendees = "";
-        this.glutenFree = false;
-        this.peanutFree = false;
-        this.guests.unshift(response.data)
-        this.getGuests();
+        controller.host = false;
+        controller.hostName = "";
+        controller.hostDate = "";
+        controller.name = "";
+        controller.food = "";
+        controller.recipeUrl = "";
+        controller.profilePic = "";
+        controller.needOven = false;
+        controller.attendees = "";
+        controller.glutenFree = false;
+        controller.peanutFree = false;
+        controller.guests.unshift(response.data)
+        controller.getGuests();
     }, function(){
         console.log('error');
     });
@@ -152,6 +152,8 @@ app.controller('PotluckController', ['$http', function($http){
     }).then(function(response){
         console.log(response);
         controller.toggleWhenUserIsLoggedIn();
+        controller.toggleInfo();
+        controller.getGuests();
     })
   }
 
@@ -159,8 +161,8 @@ app.controller('PotluckController', ['$http', function($http){
   this.logout = function(){
         this.username = "";
         this.password = "";
-        this.toggleWhenUserIsLoggedIn();
-        this.getGuests();
+        controller.toggleWhenUserIsLoggedIn();
+        controller.getGuests();
   };
 
 /*********    Show and Reveal Functions      ********/
@@ -207,5 +209,5 @@ app.controller('PotluckController', ['$http', function($http){
 
 
 
-  this.getGuests();
+  controller.getGuests();
 }]);

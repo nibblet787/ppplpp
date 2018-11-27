@@ -20,7 +20,7 @@
           <a href="#" class="" ng-click="ctrl.getGuests()">Home</a>
           <a href="#" class="" ng-click="ctrl.getGuests()">View Guests</a>
           <a href="mailto:rickchristenhusz@gmail.com" class="">Contact</a>
-          <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="" id="">Logout</a>
+          <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="logout" id="">Logout</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.changeInclude('add')"class="" href="#" id="">Add New Guest</a>
           <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.changeInclude('login')" class="" href="#" id="">Login</a>
           <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.changeInclude('create')" class="" href="#" id="">Create Party</a>
@@ -31,7 +31,7 @@
 
       <!-- =-=-=-=-==-=-=- Create Party -=-=-=-=-=-==-=- -->
       <div class="createFind">
-        <div class="createParty" ng-hide="ctrl.showFindParty">
+        <div class="createParty" ng-hide="ctrl.showFindParty || ctrl.showWhenLoggedIn">
           <h3>Create a Party!</h3>
           <p>Don't let it happen where everyone brings potato salad... again! Signing up is quick and easy, and opens up a whole lot of party planning options!</p>
           <button ng-if='!ctrl.showWhenLoggedIn'  ng-hide="ctrl.showCreate" ng-click="ctrl.toggleCreate()" class="create">Create!</button>
@@ -54,7 +54,7 @@
         </div>
 
         <!-- -=-=-==-=-=-=-=-=- Find Party -=-=-=-==-=-=-=- -->
-        <div class="findParty" ng-hide="ctrl.showCreate">
+        <div class="findParty" ng-hide="ctrl.showCreate || ctrl.showWhenLoggedIn">
           <h3>Find a Party!</h3>
           <p>Invited to a party? Enter the host's email and special password below and find their party page!</p>
           <button ng-if='!ctrl.showWhenLoggedIn'  ng-hide="ctrl.showFindParty" ng-click="ctrl.toggleFindParty()" class="create">Find a Party</button>

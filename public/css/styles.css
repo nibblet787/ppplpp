@@ -170,7 +170,7 @@ a {
   margin-bottom: 5px;
 }
 
-.del:hover, .edit:hover {
+.del:hover, .edit:hover, .closeButton:hover, .logout:hover {
   cursor: pointer;
 }
 /* .guestInfo {
