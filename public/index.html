@@ -13,57 +13,106 @@
   <body ng-controller="PotluckController as ctrl">
     <div class="container ">
       <h1><em>P</em>otent <em>P</em>otables <br/><em>P</em>otluck <em>P</em>arty <em>P</em>lanner</h1>
-    <!-- -=-=-=-=-= NavBar -=-=-=-==-=- -->
 
+    <!-- -=-=-=-=-= NavBar -=-=-=-==-=- -->
       <nav class='headerNav'>
         <div class="navbar">
-          <h3 ng-if='ctrl.showWhenLoggedIn'>Welcome, {{ctrl.username}}</h3>
-          <a href="#" class="" ng-click="ctrl.changeInclude('home')">Home</a>
-          <a href="#" class="" ng-click="ctrl.changeInclude('view')">View Guests</a>
-          <!-- <a href="#" class="">Clients</a> -->
+          <a href="#" class="" ng-click="ctrl.getGuests()">Home</a>
+          <a href="#" class="" ng-click="ctrl.getGuests()">View Guests</a>
           <a href="mailto:rickchristenhusz@gmail.com" class="">Contact</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="" id="">Logout</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.changeInclude('add')"class="" href="#" id="">Add New Guest</a>
-          <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.createGuestSeed()" class="" href="#" id="">Seed Guests</a>
           <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.changeInclude('login')" class="" href="#" id="">Login</a>
-          <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.changeInclude('create')" class="" href="#" id="">Sign Up</a>
+          <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.changeInclude('create')" class="" href="#" id="">Create Party</a>
         </div>
       </nav>
 
-      <!-- </div> -->
-      <!-- =-=-=-=-=-=- View Guests -=-=-=-=-=- -->
-
       <div class="bg"></div>
 
-      <div class='guests'  ng-repeat="guest in ctrl.guests">
-        <img ng-click="ctrl.toggleInfo($index)" class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest">
-        <label class="guestName">
-          Name: {{ guest.name }}
-        </label>
-        <div ng-if="$index === ctrl.indexOfEditFormShow">
-          <label class="">
-            {{ car.year }}
-          </label>
-          <label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-            {{ car.color }}
-          </label>
-          <label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-            {{ car.email }}
-          </label>
-          <label style="width: 100%;" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-            {{ car.notes }}
-          </label>
-          <label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-            {{car.availability ? 'Yes' : 'No'}}
-          </label>
-          <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="del-edit" src="/assets/delete.png" style="width:20px;" ng-click="ctrl.deleteCar(car)"/>
-          <a href="#" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' ng-click="ctrl.toggleEdit($index)">
-            <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="del-edit" src="/assets/edit-16.png" style="width:20px;" />
-          </a>
+      <!-- =-=-=-=-==-=-=- Create Party -=-=-=-=-=-==-=- -->
+      <div class="createFind">
+        <div class="createParty" ng-hide="ctrl.showFindParty">
+          <h3>Create a Party!</h3>
+          <p>Don't let it happen where everyone brings potato salad... again! Signing up is quick and easy, and opens up a whole lot of party planning options!</p>
+          <button ng-if='!ctrl.showWhenLoggedIn'  ng-hide="ctrl.showCreate" ng-click="ctrl.toggleCreate()" class="create">Create!</button>
+        <form ng-submit="ctrl.createUser()" ng-show="ctrl.showCreate">
+            <div class="container" style="border: 1px solid grey; border-radius: 5px; padding:2%;">
+              <div class="row">
+                <div class="findInput">
+                  <img class="closeButton" src="/assets/close.png" ng-click="ctrl.toggleCreate()" alt="">
+                  <label>Username</label>
+                  <input class="u-full-width username" type="text" ng-model="ctrl.username" placeholder="username" required/>
+                </div>
+                <div class="">
+                  <label>Password</label>
+                  <input class="u-full-width password" type="password" ng-model="ctrl.password" placeholder="password" required/>
+                </div>
+                <input class="button-primary" ng-click="ctrl.toggleCreate()" type="submit" value="Create User">
+              </div>
+            </div>
+          </form>
         </div>
+
+        <!-- -=-=-==-=-=-=-=-=- Find Party -=-=-=-==-=-=-=- -->
+        <div class="findParty" ng-hide="ctrl.showCreate">
+          <h3>Find a Party!</h3>
+          <p>Invited to a party? Enter the host's email and special password below and find their party page!</p>
+          <button ng-if='!ctrl.showWhenLoggedIn'  ng-hide="ctrl.showFindParty" ng-click="ctrl.toggleFindParty()" class="create">Find a Party</button>
+          <form class="username" ng-show="ctrl.showFindParty" ng-submit="ctrl.logIn()">
+            <div class="container " style="border: 1px solid grey; border-radius: 5px; padding:2%;">
+              <div class="row">
+                <div class="findInput">
+                  <img class="closeButton" src="/assets/close.png" ng-click="ctrl.toggleFindParty()" alt="">
+                  <label>Username</label>
+                  <input class="u-full-width username" type="text" ng-model="ctrl.username" placeholder="username" required/>
+                </div>
+                <div class="">
+                  <label>Password</label>
+                  <input class="u-full-width password" type="password" ng-model="ctrl.password" placeholder="password" required/>
+                </div>
+                <input class="button-primary" type="submit" value="Login">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- =-=-=-=-=-=- View Guests -=-=-=-=-=- -->
+      <div class='guests' ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
+          <img  class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest"><br>
+          <li><label class="guestName">
+            {{ guest.name }}<br><br>
+          </label></li>
+
+          <ul  class="infoList" >
+            <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+              Food: {{ guest.food }}
+            </label></li>
+            <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+              Recipe Link: <a href="{{ guest.recipeUrl }}" target="_blank">{{ guest.recipeUrl }}</a>
+            </label></li>
+            <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+              Need to use the oven? {{ guest.needOven ? 'Yes' : 'No'}}
+            </label></li>
+            <li><label style="width: 100%;" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+              How many people are coming with you? {{ guest.attendees }}
+            </label></li>
+            <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+              Is it gluten-free? {{guest.glutenFree ? 'Yes' : 'No'}}
+            </label></li>
+            <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+              Is it peanut-free? {{guest.peanutFree ? 'Yes' : 'No'}}
+            </label></li>
+            <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="del" src="/assets/rubbish-bin.png" ng-click="ctrl.deleteGuest(guest)"/>
+            <!-- <a class="del-edit" href="#" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' ng-click="ctrl.toggleEdit($index)"> -->
+              <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="edit" src="/assets/pencil-edit-button.png" ng-click="ctrl.toggleEdit($index)"/>
+            </a>
+          </ul>
+
       </div>
 
 
     </div>
+    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
   </body>
 </html>

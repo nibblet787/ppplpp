@@ -170,6 +170,7 @@ app.controller('PotluckController', ['$http', function($http){
   this.showCreate = false;
   this.showInfo = false;
   this.showWhenLoggedIn = false;
+  this.showFindParty = false;
 
   this.toggleAddGuest = function(){
         this.showAddGuest =  !this.showAddGuest;
@@ -199,6 +200,12 @@ app.controller('PotluckController', ['$http', function($http){
   this.toggleWhenUserIsLoggedIn = function(){
       this.showWhenLoggedIn = !this.showWhenLoggedIn;
   };
+
+  this.toggleFindParty = function() {
+    this.showFindParty = !this.showFindParty
+  };
+
+
 
   this.getGuests();
 }]);
