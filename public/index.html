@@ -38,7 +38,7 @@
     <h1>Potent Potables Potluck Party Planner</h1>
 
       <div class='guests'  ng-repeat="guest in ctrl.guests">
-        <img ng-click="ctrl.toggleInfo($index)" class="profilePic" src="{{ guest.profilePic }}"  style="width: 100px; " alt="pics of guest">
+        <img ng-click="ctrl.toggleInfo($index)" class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest">
         <label class="guestName">
           Name: {{ guest.name }}
         </label>
