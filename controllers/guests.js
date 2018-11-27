@@ -10,7 +10,7 @@ const router = express.Router();
 // =======================================
 const Guests = require('../models/guests.js');
 const User = require('../models/users.js');
-const guestsSeeds = require ('../models/seed.js');
+// const guestsSeeds = require ('../models/seed.js');
 
 // =======================================
 //              ROUTES

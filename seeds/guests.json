@@ -1,8 +1,8 @@
-module.exports = [
-  {
+
+  [{
     "host": true,
     "hostName": "n/a",
-    "hostDate": 4,
+    "hostDate": "n/a",
     "name": "Jim Jones",
     "food": "Kool-aid",
     "recipeUrl": "https://goo.gl/gjxsfn",

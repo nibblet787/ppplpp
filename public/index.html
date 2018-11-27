@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" ng-app="Potluck">
   <head>
     <meta charset="utf-8">
     <title>PPPLPP</title>
@@ -11,21 +11,61 @@
     <link rel="stylesheet" href="./css/styles.css">
   </head>
   <body ng-controller="PotluckController as ctrl">
+    <!-- -=-=-=-=-= NavBar -=-=-=-==-=- -->
+
     <div class="sidenav">
-      <a href="#">About</a>
-      <a href="#">Organize A Party</a>
-      <a href="#">Guests</a>
-      <!-- <a href="#">Contact</a> -->
+      <a href="#" class="nav-butt" ng-click="ctrl.changeInclude('home')">Home</a>
+      <a href="#" class="nav-butt" ng-click="ctrl.changeInclude('view')">View Guests</a>
+      <!-- <a href="#" class="nav-butt">Clients</a> -->
+      <a href="#" class="nav-butt">Contact</a>
+
+      <h3 ng-if='ctrl.showWhenLoggedIn'>Welcome, {{ctrl.username}}</h3>
+
+      <nav class='headerNav'>
+        <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="button button-primary" id="nav-butt2">Logout</a>
+        <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.changeInclude('add')"class="button button-primary" href="#" id="nav-butt3">Add New Guest</a>
+        <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.createGuestSeed()" class="button button-primary" href="#" id="nav-butt4">Seed Guests</a>
+
+        <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.changeInclude('login')" class="button button-primary" href="#" id="nav-butt">Login</a>
+        <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.changeInclude('create')" class="button button-primary" href="#" id="nav-butt1">Sign Up</a>
+      </nav>
+
     </div>
-    <div class="main_right">
-      <header>
-        <h1>Potent Potables Potluck Party Planner</h1>
-        <nav class='headerNav'>
-          <a ng-click="ctrl.logout()" class="button button-primary" ng-if='ctrl.showWhenLoggedIn'>Logout</a>
-          <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.toggleLogin()" class="button button-primary" href="#" >Login</a>
-          <a ng-click="ctrl.toggleCreate()" class="button button-primary" href="#" >Create User</a>
-        </nav>
-      </header>
+    </div>
+    <!-- =-=-=-=-=-=- View Guests -=-=-=-=-=- -->
+    <div class="container ">
+    <div class="bg"></div>
+    <h1>Potent Potables Potluck Party Planner</h1>
+
+      <div class='guests'  ng-repeat="guest in ctrl.guests">
+        <img ng-click="ctrl.toggleInfo($index)" class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest">
+        <label class="guestName">
+          Name: {{ guest.name }}
+        </label>
+        <div ng-if="$index === ctrl.indexOfEditFormShow">
+          <label class="car-mini-label">
+            Model Year: {{ car.year }}
+          </label>
+          <label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+            Car Color: {{ car.color }}
+          </label>
+          <label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="car-mini-label">
+            Contact Email: {{ car.email }}
+          </label>
+          <label style="width: 100%;" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="car-mini-label">
+            Car notes: {{ car.notes }}
+          </label>
+          <label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="car-mini-label">
+            Car Availablity: {{car.availability ? 'Yes' : 'No'}}
+          </label>
+          <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="del-edit" src="/assets/delete.png" style="width:20px;" ng-click="ctrl.deleteCar(car)"/>
+          <a href="#" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' ng-click="ctrl.toggleEdit($index)">
+            <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="del-edit" src="/assets/edit-16.png" style="width:20px;" />
+          </a>
+        </div>
+      </div>
+
+
     </div>
   </body>
 </html>
