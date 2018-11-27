@@ -69,15 +69,25 @@ body {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .navbar {
-  display: inline;
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .headerNav {
-  display: flex;
-  justify-content: flex-end;
+  /* display: flex; */
+  /* justify-content: space-between; */
   width: 100%;
   background-color: rgb(223, 254, 232);
+  margin-bottom: 20px;
+  text-decoration: none;
 }
 
 /* .sidenav {
