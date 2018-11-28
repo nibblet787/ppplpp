@@ -17,13 +17,13 @@
     <!-- -=-=-=-=-= NavBar -=-=-=-==-=- -->
       <nav class='headerNav'>
         <div class="navbar">
-          <a href="#" class="" ng-click="ctrl.getGuests()">Home</a>
+          <a href="#" class="" ng-click="ctrl.goHome()">Home</a>
           <a href="#" class="" ng-click="ctrl.getGuests()">View Guests</a>
           <a href="mailto:rickchristenhusz@gmail.com" class="">Contact</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="logout" id="">Logout</a>
-          <a ng-if='ctrl.showWhenLoggedIn' ng-click=""class="" href="#" id="">Add New Guest</a>
+          <a ng-if='ctrl.showWhenLoggedIn' ng-click="" class="" href="#" id="">Add New Guest</a>
           <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="" class="" href="#" id="">Login</a>
-          <a ng-if='!ctrl.showWhenLoggedIn' ng-click="" class="" href="#" id="">Create Party</a>
+          <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.toggleCreate()" class="" href="#" id="">Create Party</a>
         </div>
       </nav>
 
@@ -55,7 +55,7 @@
 
         <!-- -=-=-==-=-=-=-=-=- Find Party -=-=-=-==-=-=-=- -->
         <div class="findParty" ng-hide="ctrl.showCreate || ctrl.showWhenLoggedIn">
-          <h3>Find a Party!</h3>
+          <h3>Login or Find a Party!</h3>
           <p>Invited to a party? Enter the host's email and special password below and find their party page!</p>
           <button ng-if='!ctrl.showWhenLoggedIn'  ng-hide="ctrl.showFindParty" ng-click="ctrl.toggleFindParty()" class="create">Find a Party</button>
           <form class="username" ng-show="ctrl.showFindParty" ng-submit="ctrl.logIn()">

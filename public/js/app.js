@@ -2,7 +2,7 @@ const app = angular.module('Potluck', []);
 
 app.controller('PotluckController', ['$http', function($http){
 
-// =-=-=-=-= Rest variables -=-=-=-=-=
+// =-=-=-=-= Reset variables -=-=-=-=-=
   this.host = false;
   this.hostName = "";
   this.hostDate = "";
@@ -162,8 +162,22 @@ app.controller('PotluckController', ['$http', function($http){
         this.username = "";
         this.password = "";
         controller.toggleWhenUserIsLoggedIn();
-        controller.getGuests();
+        controller.resetToggles();
   };
+
+  // this.logout = function(){
+  //   $http({
+  //       method:'DELETE',
+  //       url:'/sessions',
+  //       data: {
+  //         this.username = "";
+  //         this.password = "";
+  //       }
+  //   }).then(function(response){
+  //     controller.resetToggles();
+  //   })
+  // }
+
 
 /*********    Show and Reveal Functions      ********/
   this.showAddGuest = false;
@@ -207,7 +221,23 @@ app.controller('PotluckController', ['$http', function($http){
     this.showFindParty = !this.showFindParty
   };
 
+  this.resetToggles = function() {
+    this.showAddGuest = false;
+    this.showEdit = false;
+    this.showLogin = false;
+    this.showCreate = false;
+    this.showInfo = false;
+    this.showWhenLoggedIn = false;
+    this.showFindParty = false;
+  };
 
+  this.goHome = function() {
+    if(this.showWhenLoggedIn == true) {
+      controller.getGuests();
+    } else {
+      controller.resetToggles();
+    }
+  }
 
   controller.getGuests();
 }]);
