@@ -87,7 +87,7 @@
       </div>
 
       <!-- =-=-=-=-=-=- View Guests -=-=-=-=-=- -->
-      <div class='guests' ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
+      <div class='guests' ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' ng-hide="ctrl.showEdit">
           <img  class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest"><br>
           <li><label class="guestName">
             {{ guest.name }}<br><br>
@@ -103,7 +103,7 @@
             <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
               Need to use the oven? {{ guest.needOven ? 'Yes' : 'No'}}
             </label></li>
-            <li><label style="width: 100%;" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+            <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
               How many people are coming with you? {{ guest.attendees }}
             </label></li>
             <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
@@ -118,6 +118,62 @@
             </a>
           </ul>
       </div>
+
+      <!-- =-=-=-=-=-=-=-=-=-=-=- Edit Guests -=-=-=-=-=-=-==-=-=-=-= -->
+      <div class="edit-flex"  >
+        <div class="editParty"  ng-show="ctrl.showEdit">
+          <h3>Edit Guest Profile</h3>
+          <form ng-submit="ctrl.editGuest(guest)">
+            <!-- <div class="container">
+              <div class="row">
+                <div class="six columns"> -->
+                  <label>Enter Name</label>
+                    <input class="u-full-width" type="text" ng-model="ctrl.editedName" placeholder="Name" required/>
+                <!-- </div> -->
+                <!-- <div class="six columns"> -->
+                  <label>Enter Model</label>
+                    <input class="u-full-width" type="text" ng-model="ctrl.editedModel" value="model" required/>
+                <!-- </div>
+              </div>
+            </div> -->
+            <input class="button-primary" type="submit" value="Apply Changes">
+          </form>
+          <div class="row">
+            <div class="six columns">
+              <label>Enter Year</label>
+              <input class="u-full-width" type="year" ng-model="ctrl.editedYear" placeholder="YYYY"/>
+            </div>
+            <div class="six columns">
+              <label>Enter Color</label>
+              <input class="u-full-width" type="text" ng-model="ctrl.editedColor" placeholder="Color"/>
+            </div>
+          </div>
+
+          <label for="exampleMessage">Profile Pic</label>
+          <input class="u-full-width"type="text" ng-model="ctrl.editedImage" placeholder="{{ guest.profilePic }}"/>
+          <label for="exampleMessage">Email</label>
+          <input class="u-full-width" type="text" ng-model="ctrl.editedEmail" placeholder="Add email"/>
+
+          <div class="row">
+            <div class="six columns">
+              <label class="example-send-yourself-copy">
+                <input type="checkbox" ng-model="ctrl.editedAvailability"/>
+                  <span class="label-body"> Available</span>
+              </label>
+            </div>
+            <div class="six columns">
+              <label class="container">Tags:
+                <input type="text" ng-model="ctrl.editedTags" value=""/>
+            </label>
+            </div>
+          </div>
+
+          <label for="exampleMessage">Notes</label>
+          <input class="u-full-width"type="text" ng-model="ctrl.editedNotes" placeholder="Optional"/>
+          <input class="button-primary" type="submit" value="Apply Changes">
+        </div>
+      </div>
+
     </div>
     <footer>
       <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

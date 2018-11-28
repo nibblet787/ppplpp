@@ -14,7 +14,7 @@ app.controller('PotluckController', ['$http', function($http){
   this.attendees = "";
   this.glutenFree = false;
   this.peanutFree = false;
-  this.indexOfEditFormShow = 0;
+  this.indexOfEditFormShow = 1;
 
   const controller = this;
 
@@ -90,6 +90,7 @@ app.controller('PotluckController', ['$http', function($http){
 
 /*********    Update route      ********/
   this.editGuest = function(guest){
+    console.log(guest);
     $http({
       method: 'PUT',
       url: '/guests/' + guest._id,
@@ -108,17 +109,17 @@ app.controller('PotluckController', ['$http', function($http){
       }
     }).then(function(response){
       controller.getGuests();
-      this.host = false;
-      this.hostName = "";
-      this.hostDate = "";
-      this.name = "";
-      this.food = "";
-      this.recipeUrl = "";
-      this.profilePic = "";
-      this.needOven = false;
-      this.attendees = "";
-      this.glutenFree = false;
-      this.peanutFree = false;
+      // this.host = false;
+      // this.hostName = "";
+      // this.hostDate = "";
+      // this.name = "";
+      // this.food = "";
+      // this.recipeUrl = "";
+      // this.profilePic = "";
+      // this.needOven = false;
+      // this.attendees = "";
+      // this.glutenFree = false;
+      // this.peanutFree = false;
     }, error => {
       console.log(error);
     })
@@ -196,6 +197,7 @@ app.controller('PotluckController', ['$http', function($http){
       this.indexOfEditFormShow = $index;
       console.log(this.indexOfEditFormShow);
       this.showEdit = !this.showEdit;
+      console.log(this.showEdit);
   };
 
   this.toggleLogin = function(){
