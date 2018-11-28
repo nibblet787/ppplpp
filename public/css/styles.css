@@ -13,9 +13,14 @@
   src: url('../fonts/BiggerLove-DEMO.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: "roadstar";
+  src: url('../fonts/KTF-Roadstar.ttf') format('truetype');
+}
+
 h1 {
-  font-family: "love", cursive;
-  letter-spacing: 5px;
+  font-family: "roadstar", cursive;
+  letter-spacing: 4px;
   color: rgb(223, 254, 232);
   text-shadow: 5px 2px 5px black;
   font-size: 50px;
@@ -45,27 +50,29 @@ body {
   border-radius: 5px;
   padding-top: 10px;
   padding-bottom: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
   position: relative;
   top: 0;
   /* left: 50%;
   right: 50%; */
 }
 
-.bg {
+/* .bg {
   width: 95%;
-  height: 250px;
+  height: 300px;
   display: block;
   position: relative;
   z-index: 1;
   margin: 0 auto;
   margin-bottom: 50px;
 
-}
+} */
 
-.bg:after {
+/* .bg:after {
   content: "";
-  background: url('https://i.imgur.com/t9QcniW.jpg');
-  opacity: 0.8;
+  background-image: url('https://i.imgur.com/G2ZxdW9.png'), url('https://i.imgur.com/6neOJqh.png'); /* Photo by Craig Adderley from Pexels */
+  /* opacity: 1;
   top: 0;
   left: 0;
   bottom: 0;
@@ -74,6 +81,21 @@ body {
   z-index: -1;
   background-repeat: no-repeat;
   margin: 0;
+} */
+
+.bg {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: space-around;
+  margin-top: 5px;
+
+}
+
+.bg > img {
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid white;
 }
 
 a {
