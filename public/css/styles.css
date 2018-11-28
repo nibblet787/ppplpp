@@ -138,7 +138,7 @@ a {
     /* margin: 50px; */
 }
 
-.editParty {
+.editParty, .createGuest {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
@@ -148,9 +148,10 @@ a {
   background-color: white;
   padding: 10px;
   color: black;
+  margin-top: 20px;
 }
 
-.edit-flex {
+.edit-flex, .create-flex {
   display: flex;
   justify-content: center;
   color: black;

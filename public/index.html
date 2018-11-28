@@ -17,11 +17,11 @@
     <!-- -=-=-=-=-= NavBar -=-=-=-==-=- -->
       <nav class='headerNav'>
         <div class="navbar">
-          <a href="#" class="" ng-click="ctrl.goHome()">Home</a>
-          <a href="#" class="" ng-click="ctrl.getGuests()">View Guests</a>
+          <a href="#" class="" ng-click="ctrl.viewGuests()">Home</a>
+          <a href="#" class="" ng-click="ctrl.viewGuests()">View Guests</a>
           <a href="mailto:rickchristenhusz@gmail.com" class="">Contact</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="logout" id="">Logout</a>
-          <a ng-if='ctrl.showWhenLoggedIn' ng-click="" class="" href="#" id="">Add New Guest</a>
+          <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="" href="#" id="">Add New Guest</a>
           <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="" class="" href="#" id="">Login</a>
           <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.toggleCreate()" class="" href="#" id="">Create Party</a>
         </div>
@@ -38,7 +38,8 @@
         <img src="https://i.imgur.com/QFvfnsZ.png" alt="Photo by Benjamin Sow on Unsplash">
         <img src="https://i.imgur.com/NB8V8w1.png" alt="Photo by Benjamin Sow on Unsplash">
       </div>
-      <!-- =-=-=-=-==-=-=- Create Party -=-=-=-=-=-==-=- -->
+      <!-- <button type="button" name="button" ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="button-primary"></button> -->
+      <!-- =-=-=-=-==-=-=- Create User -=-=-=-=-=-==-=- -->
       <div class="createFind">
         <div class="createParty" ng-hide="ctrl.showFindParty || ctrl.showWhenLoggedIn">
           <h3>Create a Party!</h3>
@@ -87,7 +88,8 @@
       </div>
 
       <!-- =-=-=-=-=-=- View Guests -=-=-=-=-=- -->
-      <div class='guests' ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' ng-hide="ctrl.showEdit">
+      <div class='view' ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
+        <div class="guests"  ng-hide="ctrl.showEdit || ctrl.showAddGuest">
           <img  class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest"><br>
           <li><label class="guestName">
             {{ guest.name }}<br><br>
@@ -114,66 +116,120 @@
             </label></li>
             <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="del" src="/assets/rubbish-bin.png" ng-click="ctrl.deleteGuest(guest)"/>
             <!-- <a class="del-edit" href="#" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' ng-click="ctrl.toggleEdit($index)"> -->
-              <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="edit" src="/assets/pencil-edit-button.png" ng-click="ctrl.toggleEdit($index)"/>
+              <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="edit" src="/assets/pencil-edit-button.png" ng-click="ctrl.toggleEdit($index, guest)"/>
             </a>
           </ul>
-      </div>
+        </div>
 
       <!-- =-=-=-=-=-=-=-=-=-=-=- Edit Guests -=-=-=-=-=-=-==-=-=-=-= -->
-      <div class="edit-flex"  >
+      <div class="edit-flex"  ng-if="$index === ctrl.indexOfEditFormShow">
         <div class="editParty"  ng-show="ctrl.showEdit">
           <h3>Edit Guest Profile</h3>
-          <form ng-submit="ctrl.editGuest(guest)">
-            <!-- <div class="container">
+          <form ng-submit="ctrl.editGuest(guest)" >
+            <div class="container">
               <div class="row">
-                <div class="six columns"> -->
-                  <label>Enter Name</label>
-                    <input class="u-full-width" type="text" ng-model="ctrl.editedName" placeholder="Name" required/>
-                <!-- </div> -->
-                <!-- <div class="six columns"> -->
-                  <label>Enter Model</label>
-                    <input class="u-full-width" type="text" ng-model="ctrl.editedModel" value="model" required/>
-                <!-- </div>
+                <div class="six columns">
+                  <label>Name</label>
+                  <input class="u-full-width" type="text" ng-model="ctrl.editedName" placeholder="{{guest.name}}" required/>
+                </div>
+                <div class="six columns">
+                  <label>Food To Bring</label>
+                  <input class="u-full-width" type="text" ng-model="ctrl.food" placeholder="Food" required/>
+                </div>
               </div>
-            </div> -->
-            <input class="button-primary" type="submit" value="Apply Changes">
+
+              <!-- <div class="row">
+                <div class="six columns"> -->
+                  <label>Link To Recipe</label>
+                  <input class="u-full-width" type="url" ng-model="ctrl.recipeUrl" placeholder="URL"/>
+                <!-- </div>
+                <div class="six columns"> -->
+                  <label>Profile Pic</label>
+                  <input class="u-full-width" type="url" ng-model="ctrl.profilePic" placeholder=" Profile Pic URL"/>
+                <!-- </div>
+              </div> -->
+
+              <label>No. of Guests</label>
+              <input class="u-full-width"type="number" ng-model="ctrl.attendees" placeholder="Number of guests"/>
+              <label>Email</label>
+              <input class="u-full-width"type="text" ng-model="ctrl.email" placeholder="contact email"/>
+              <div class="row">
+                <div class="six columns">
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.needOven"/>
+                    <span class="label-body"> Need the Oven?</span>
+                  </label>
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.glutenFree"/>
+                    <span class="label-body"> Gluten Free?</span>
+                  </label>
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.peanutFree"/>
+                    <span class="label-body"> Peanut Free?</span>
+                  </label>
+                </div>
+              </div>
+              <input class="button-primary" type="submit" value="Apply Changes">
+            </div>
           </form>
-          <div class="row">
-            <div class="six columns">
-              <label>Enter Year</label>
-              <input class="u-full-width" type="year" ng-model="ctrl.editedYear" placeholder="YYYY"/>
-            </div>
-            <div class="six columns">
-              <label>Enter Color</label>
-              <input class="u-full-width" type="text" ng-model="ctrl.editedColor" placeholder="Color"/>
-            </div>
-          </div>
-
-          <label for="exampleMessage">Profile Pic</label>
-          <input class="u-full-width"type="text" ng-model="ctrl.editedImage" placeholder="{{ guest.profilePic }}"/>
-          <label for="exampleMessage">Email</label>
-          <input class="u-full-width" type="text" ng-model="ctrl.editedEmail" placeholder="Add email"/>
-
-          <div class="row">
-            <div class="six columns">
-              <label class="example-send-yourself-copy">
-                <input type="checkbox" ng-model="ctrl.editedAvailability"/>
-                  <span class="label-body"> Available</span>
-              </label>
-            </div>
-            <div class="six columns">
-              <label class="container">Tags:
-                <input type="text" ng-model="ctrl.editedTags" value=""/>
-            </label>
-            </div>
-          </div>
-
-          <label for="exampleMessage">Notes</label>
-          <input class="u-full-width"type="text" ng-model="ctrl.editedNotes" placeholder="Optional"/>
-          <input class="button-primary" type="submit" value="Apply Changes">
         </div>
       </div>
+      </div>
 
+
+      <!-- =-=-=-=-===-=-=- Add new guest =-=-=-=-=-===-=-=- -->
+      <div class="create-flex"  >
+        <div class="createGuest"  ng-if="ctrl.showAddGuest">
+          <h3 >Add New Guest</h3>
+          <form ng-submit="ctrl.createGuest()">
+            <div class="container">
+              <div class="row">
+                <div class="six columns">
+                  <label>Enter Name</label>
+                  <input class="u-full-width" type="text" ng-model="ctrl.name" placeholder="Name" required/>
+                </div>
+                <div class="six columns">
+                  <label>Enter Food To Bring</label>
+                  <input class="u-full-width" type="text" ng-model="ctrl.food" placeholder="Food" required/>
+                </div>
+              </div>
+
+              <!-- <div class="row">
+                <div class="six columns"> -->
+                  <label>Link To Recipe</label>
+                  <input class="u-full-width" type="url" ng-model="ctrl.recipeUrl" placeholder="URL"/>
+                <!-- </div>
+                <div class="six columns"> -->
+                  <label>Profile Pic</label>
+                  <input class="u-full-width" type="url" ng-model="ctrl.profilePic" placeholder=" Profile Pic URL"/>
+                <!-- </div>
+              </div> -->
+
+              <label>No. of Guests</label>
+              <input class="u-full-width"type="number" ng-model="ctrl.attendees" placeholder="Number of guests"/>
+              <label>Add Contact Email</label>
+              <input class="u-full-width"type="text" ng-model="ctrl.email" placeholder="contact email"/>
+              <div class="row">
+                <div class="six columns">
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.needOven"/>
+                    <span class="label-body"> Need the Oven?</span>
+                  </label>
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.glutenFree"/>
+                    <span class="label-body"> Gluten Free?</span>
+                  </label>
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.peanutFree"/>
+                    <span class="label-body"> Peanut Free?</span>
+                  </label>
+                </div>
+              </div>
+              <input class="button-primary" type="submit" value="Add Guest">
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <footer>
       <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>

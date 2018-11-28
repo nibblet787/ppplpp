@@ -12,9 +12,11 @@ app.controller('PotluckController', ['$http', function($http){
   this.profilePic = "";
   this.needOven = false;
   this.attendees = "";
+  this.email = "";
   this.glutenFree = false;
   this.peanutFree = false;
   this.indexOfEditFormShow = 1;
+  this.guest = {};
 
   const controller = this;
 
@@ -25,7 +27,10 @@ app.controller('PotluckController', ['$http', function($http){
       url: '/guests'
     }).then(function(response){
       console.log(response.data);
-      controller.guests = response.data
+      controller.guests = response.data;
+      this.showAddGuest = false;
+      this.showEdit = false;
+      this.showInfo = true;
     }, error=>{
             console.log(error);
         })
@@ -46,6 +51,7 @@ app.controller('PotluckController', ['$http', function($http){
         profilePic: this.profilePic,
         needOven: this.needOven,
         attendees: this.attendees,
+        email: this.email,
         glutenFree: this.glutenFree,
         peanutFree: this.peanutFree
       }
@@ -63,6 +69,7 @@ app.controller('PotluckController', ['$http', function($http){
         controller.peanutFree = false;
         controller.guests.unshift(response.data)
         controller.getGuests();
+        controller.toggleAddGuest();
     }, function(){
         console.log('error');
     });
@@ -93,7 +100,7 @@ app.controller('PotluckController', ['$http', function($http){
     console.log(guest);
     $http({
       method: 'PUT',
-      url: '/guests/' + guest._id,
+      url: '/guests/' + this.guest._id,
       data: {
         host: this.editedHost,
         hostName: this.editedHostName,
@@ -104,11 +111,13 @@ app.controller('PotluckController', ['$http', function($http){
         profilePic: this.editedProfilePic,
         needOven: this.editedNeedOven,
         attendees: this.editedAttendees,
+        email: this.email,
         glutenFree: this.editedGlutenFree,
         peanutFree: this.editedPeanutFree
       }
     }).then(function(response){
       controller.getGuests();
+      controller.toggleEdit();
       // this.host = false;
       // this.hostName = "";
       // this.hostDate = "";
@@ -191,13 +200,16 @@ app.controller('PotluckController', ['$http', function($http){
 
   this.toggleAddGuest = function(){
         this.showAddGuest =  !this.showAddGuest;
+        // console.log(this.showAddGuest);
   };
 
-  this.toggleEdit = function($index){
+  this.toggleEdit = function($index, guest){
       this.indexOfEditFormShow = $index;
       console.log(this.indexOfEditFormShow);
+      this.guest = guest;
+      console.log(this.guest);
       this.showEdit = !this.showEdit;
-      console.log(this.showEdit);
+      // console.log(this.showEdit);
   };
 
   this.toggleLogin = function(){
@@ -232,6 +244,12 @@ app.controller('PotluckController', ['$http', function($http){
     this.showWhenLoggedIn = false;
     this.showFindParty = false;
   };
+
+  this.viewGuests = function() {
+    this.showAddGuest = false;
+    this.showEdit = false;
+    this.showInfo = true;
+  }
 
   this.goHome = function() {
     if(this.showWhenLoggedIn == true) {
