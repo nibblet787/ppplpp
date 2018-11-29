@@ -22,7 +22,7 @@
           <a href="mailto:rickchristenhusz@gmail.com" class="">Contact</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="logout" id="">Logout</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="" href="#" id="">Add New Guest</a>
-          <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="" class="" href="#" id="">Login</a>
+          <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.toggleFindParty()" class="" href="#" id="">Login</a>
           <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.toggleCreate()" class="" href="#" id="">Create Party</a>
         </div>
       </nav>

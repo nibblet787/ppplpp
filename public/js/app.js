@@ -274,6 +274,8 @@ app.controller('PotluckController', ['$http', function($http){
     this.showAddGuest = false;
     this.showEdit = false;
     this.showInfo = true;
+    this.showFindParty = false;
+    this.showCreate = false;
   }
 
   this.goHome = function() {
