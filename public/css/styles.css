@@ -190,15 +190,21 @@ a {
   width: 10px;
 }
 
-.create, #create {
+.create, #find, #create {
   margin-left: auto;
   margin-right: auto;
   background-color: rgb(128, 82, 16);
   color: white;
 }
 
-#create {
+#find {
   margin-left: 10rem;
+  background-color: rgb(128, 82, 16);
+  color: white;
+}
+
+#create {
+  margin-left: 7rem;
   background-color: rgb(128, 82, 16);
   color: white;
 }
