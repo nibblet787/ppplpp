@@ -18,12 +18,12 @@
       <nav class='headerNav'>
         <div class="navbar">
           <a href="#" class="" ng-click="ctrl.viewGuests()">Home</a>
-          <a href="#" class="" ng-click="ctrl.viewGuests()">View Guests</a>
+          <a href="#view" class="" ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.viewGuests()">View Guests</a>
           <a href="mailto:rickchristenhusz@gmail.com" class="">Contact</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="logout" id="">Logout</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="" href="#" id="">Add New Guest</a>
-          <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.toggleFindParty()" class="" href="#" id="">Login</a>
-          <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.toggleCreate()" class="" href="#" id="">Create Party</a>
+          <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.toggleFindParty()" class="" href="#findParty" id="">Login</a>
+          <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.toggleCreate()" class="" href="#createFind" id="">Create Party</a>
         </div>
       </nav>
 
@@ -41,7 +41,7 @@
       <!-- <button type="button" name="button" ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="button-primary"></button> -->
 
       <!-- =-=-=-=-==-=-=- Create User -=-=-=-=-=-==-=- -->
-      <div class="createFind">
+      <div id="createFind" class="createFind">
         <div class="createParty" ng-hide="ctrl.showFindParty || ctrl.showWhenLoggedIn">
           <h3>Create a Party!</h3>
           <p>Don't let it happen where everyone brings potato salad... again! Signing up is quick and easy, and opens up a whole lot of party planning options!</p>
@@ -65,7 +65,7 @@
         </div>
 
         <!-- -=-=-==-=-=-=-=-=- Find Party -=-=-=-==-=-=-=- -->
-        <div class="findParty" ng-hide="ctrl.showCreate || ctrl.showWhenLoggedIn">
+        <div id="findParty" class="findParty" ng-hide="ctrl.showCreate || ctrl.showWhenLoggedIn">
           <h3>Login or Find a Party!</h3>
           <p>Invited to a party? Enter the host's email and special password below and find their party page!</p>
           <button ng-if='!ctrl.showWhenLoggedIn'  ng-hide="ctrl.showFindParty" ng-click="ctrl.toggleFindParty()" class="create">Find a Party</button>
@@ -101,7 +101,7 @@
       </div>
 
       <!-- =-=-=-=-=-=- View Guests -=-=-=-=-=- -->
-      <div class="view" ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
+      <div id="view" class="view" ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
         <div class="guests"  ng-hide="ctrl.showEdit || ctrl.showAddGuest">
           <img  class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest"><br>
           <li><label class="guestName">
