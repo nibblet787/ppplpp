@@ -20,13 +20,19 @@ app.controller('PotluckController', ['$http', function($http){
 
   const controller = this;
 
+  // this.reset = function() {
+  //   this.name = '';
+  //   $http.editForm.$setPristine();
+  //   $http.editForm.$setUntouched();
+  // }
+
 /*********    Show route      ********/
   this.getGuests = function(){
     $http({
       method:'GET',
       url: '/guests'
     }).then(function(response){
-      console.log(response.data);
+      // console.log(response.data);
       controller.guests = response.data;
       this.showAddGuest = false;
       this.showEdit = false;
@@ -35,6 +41,21 @@ app.controller('PotluckController', ['$http', function($http){
             console.log(error);
         })
     };
+
+    this.getUser = function(){
+      $http({
+        method:'GET',
+        url: '/users'
+      }).then(function(response){
+        console.log(response.data);
+        controller.users = response.data;
+        this.showAddGuest = false;
+        this.showEdit = false;
+        this.showInfo = true;
+      }, error=>{
+              console.log(error);
+          })
+      };
 
 /*********    Create route      ********/
   this.createGuest = function(){
@@ -97,7 +118,7 @@ app.controller('PotluckController', ['$http', function($http){
 
 /*********    Update route      ********/
   this.editGuest = function(guest){
-    console.log(guest);
+    // console.log(guest);
     $http({
       method: 'PUT',
       url: '/guests/' + this.guest._id,
@@ -111,13 +132,17 @@ app.controller('PotluckController', ['$http', function($http){
         profilePic: this.editedProfilePic,
         needOven: this.editedNeedOven,
         attendees: this.editedAttendees,
-        email: this.email,
+        email: this.editedEmail,
         glutenFree: this.editedGlutenFree,
         peanutFree: this.editedPeanutFree
       }
     }).then(function(response){
       controller.getGuests();
       controller.toggleEdit();
+      // controller.reset();
+      name = "";
+      editedname = "";
+      this.editedName = "";
       // this.host = false;
       // this.hostName = "";
       // this.hostDate = "";
@@ -160,7 +185,7 @@ app.controller('PotluckController', ['$http', function($http){
             password:this.password
         }
     }).then(function(response){
-        console.log(response);
+        // console.log(response);
         controller.toggleWhenUserIsLoggedIn();
         controller.toggleInfo();
         controller.getGuests();
@@ -205,9 +230,9 @@ app.controller('PotluckController', ['$http', function($http){
 
   this.toggleEdit = function($index, guest){
       this.indexOfEditFormShow = $index;
-      console.log(this.indexOfEditFormShow);
+      // console.log(this.indexOfEditFormShow);
       this.guest = guest;
-      console.log(this.guest);
+      // console.log(this.guest);
       this.showEdit = !this.showEdit;
       // console.log(this.showEdit);
   };
