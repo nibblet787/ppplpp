@@ -9,6 +9,7 @@ const guestSchema = new mongoose.Schema({
   profilePic:{type: String, default: 'https://i.imgur.com/jNNT4LE.png'},
   needOven:{type: Boolean, default: false},
   attendees:{type: Number},
+  email:{type:String},
   glutenFree:{type: Boolean, required: true, default: false},
   peanutFree:{type: Boolean, required: true, default: false}
 });

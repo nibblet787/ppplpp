@@ -2,7 +2,7 @@ const app = angular.module('Potluck', []);
 
 app.controller('PotluckController', ['$http', function($http){
 
-// =-=-=-=-= Rest variables -=-=-=-=-=
+// =-=-=-=-= Reset variables -=-=-=-=-=
   this.host = false;
   this.hostName = "";
   this.hostDate = "";
@@ -12,11 +12,19 @@ app.controller('PotluckController', ['$http', function($http){
   this.profilePic = "";
   this.needOven = false;
   this.attendees = "";
+  this.email = "";
   this.glutenFree = false;
   this.peanutFree = false;
-  this.indexOfEditFormShow = 0;
+  this.indexOfEditFormShow = 1;
+  this.guest = {};
 
   const controller = this;
+
+  // this.reset = function() {
+  //   this.name = '';
+  //   $http.editForm.$setPristine();
+  //   $http.editForm.$setUntouched();
+  // }
 
 /*********    Show route      ********/
   this.getGuests = function(){
@@ -24,12 +32,30 @@ app.controller('PotluckController', ['$http', function($http){
       method:'GET',
       url: '/guests'
     }).then(function(response){
-      console.log(response.data);
-      controller.guests = response.data
+      // console.log(response.data);
+      controller.guests = response.data;
+      this.showAddGuest = false;
+      this.showEdit = false;
+      this.showInfo = true;
     }, error=>{
             console.log(error);
         })
     };
+
+    this.getUser = function(){
+      $http({
+        method:'GET',
+        url: '/users'
+      }).then(function(response){
+        console.log(response.data);
+        controller.users = response.data;
+        this.showAddGuest = false;
+        this.showEdit = false;
+        this.showInfo = true;
+      }, error=>{
+              console.log(error);
+          })
+      };
 
 /*********    Create route      ********/
   this.createGuest = function(){
@@ -46,6 +72,7 @@ app.controller('PotluckController', ['$http', function($http){
         profilePic: this.profilePic,
         needOven: this.needOven,
         attendees: this.attendees,
+        email: this.email,
         glutenFree: this.glutenFree,
         peanutFree: this.peanutFree
       }
@@ -63,6 +90,7 @@ app.controller('PotluckController', ['$http', function($http){
         controller.peanutFree = false;
         controller.guests.unshift(response.data)
         controller.getGuests();
+        controller.toggleAddGuest();
     }, function(){
         console.log('error');
     });
@@ -90,9 +118,10 @@ app.controller('PotluckController', ['$http', function($http){
 
 /*********    Update route      ********/
   this.editGuest = function(guest){
+    // console.log(guest);
     $http({
       method: 'PUT',
-      url: '/guests/' + guest._id,
+      url: '/guests/' + this.guest._id,
       data: {
         host: this.editedHost,
         hostName: this.editedHostName,
@@ -103,22 +132,28 @@ app.controller('PotluckController', ['$http', function($http){
         profilePic: this.editedProfilePic,
         needOven: this.editedNeedOven,
         attendees: this.editedAttendees,
+        email: this.editedEmail,
         glutenFree: this.editedGlutenFree,
         peanutFree: this.editedPeanutFree
       }
     }).then(function(response){
       controller.getGuests();
-      this.host = false;
-      this.hostName = "";
-      this.hostDate = "";
-      this.name = "";
-      this.food = "";
-      this.recipeUrl = "";
-      this.profilePic = "";
-      this.needOven = false;
-      this.attendees = "";
-      this.glutenFree = false;
-      this.peanutFree = false;
+      controller.toggleEdit();
+      // controller.reset();
+      name = "";
+      editedname = "";
+      this.editedName = "";
+      // this.host = false;
+      // this.hostName = "";
+      // this.hostDate = "";
+      // this.name = "";
+      // this.food = "";
+      // this.recipeUrl = "";
+      // this.profilePic = "";
+      // this.needOven = false;
+      // this.attendees = "";
+      // this.glutenFree = false;
+      // this.peanutFree = false;
     }, error => {
       console.log(error);
     })
@@ -150,7 +185,7 @@ app.controller('PotluckController', ['$http', function($http){
             password:this.password
         }
     }).then(function(response){
-        console.log(response);
+        // console.log(response);
         controller.toggleWhenUserIsLoggedIn();
         controller.toggleInfo();
         controller.getGuests();
@@ -162,8 +197,22 @@ app.controller('PotluckController', ['$http', function($http){
         this.username = "";
         this.password = "";
         controller.toggleWhenUserIsLoggedIn();
-        controller.getGuests();
+        controller.resetToggles();
   };
+
+  // this.logout = function(){
+  //   $http({
+  //       method:'DELETE',
+  //       url:'/sessions',
+  //       data: {
+  //         this.username = "";
+  //         this.password = "";
+  //       }
+  //   }).then(function(response){
+  //     controller.resetToggles();
+  //   })
+  // }
+
 
 /*********    Show and Reveal Functions      ********/
   this.showAddGuest = false;
@@ -176,12 +225,16 @@ app.controller('PotluckController', ['$http', function($http){
 
   this.toggleAddGuest = function(){
         this.showAddGuest =  !this.showAddGuest;
+        // console.log(this.showAddGuest);
   };
 
-  this.toggleEdit = function($index){
+  this.toggleEdit = function($index, guest){
       this.indexOfEditFormShow = $index;
-      console.log(this.indexOfEditFormShow);
+      // console.log(this.indexOfEditFormShow);
+      this.guest = guest;
+      // console.log(this.guest);
       this.showEdit = !this.showEdit;
+      // console.log(this.showEdit);
   };
 
   this.toggleLogin = function(){
@@ -207,7 +260,31 @@ app.controller('PotluckController', ['$http', function($http){
     this.showFindParty = !this.showFindParty
   };
 
+  this.resetToggles = function() {
+    this.showAddGuest = false;
+    this.showEdit = false;
+    this.showLogin = false;
+    this.showCreate = false;
+    this.showInfo = false;
+    this.showWhenLoggedIn = false;
+    this.showFindParty = false;
+  };
 
+  this.viewGuests = function() {
+    this.showAddGuest = false;
+    this.showEdit = false;
+    this.showInfo = true;
+    this.showFindParty = false;
+    this.showCreate = false;
+  }
+
+  this.goHome = function() {
+    if(this.showWhenLoggedIn == true) {
+      controller.getGuests();
+    } else {
+      controller.resetToggles();
+    }
+  }
 
   controller.getGuests();
 }]);

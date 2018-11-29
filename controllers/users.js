@@ -17,4 +17,11 @@ router.post('/', (req, res)=>{
     });
 });
 
+/************* Index Route***********************/
+router.get('/', (req, res)=>{
+    User.find({}, (err, foundUser)=>{
+        res.json(foundUser);
+    });
+});
+
 module.exports = router;

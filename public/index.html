@@ -17,20 +17,31 @@
     <!-- -=-=-=-=-= NavBar -=-=-=-==-=- -->
       <nav class='headerNav'>
         <div class="navbar">
-          <a href="#" class="" ng-click="ctrl.getGuests()">Home</a>
-          <a href="#" class="" ng-click="ctrl.getGuests()">View Guests</a>
+          <a href="#" class="" ng-click="ctrl.viewGuests()">Home</a>
+          <a href="#view" class="" ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.viewGuests()">View Guests</a>
           <a href="mailto:rickchristenhusz@gmail.com" class="">Contact</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="logout" id="">Logout</a>
-          <a ng-if='ctrl.showWhenLoggedIn' ng-click=""class="" href="#" id="">Add New Guest</a>
-          <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="" class="" href="#" id="">Login</a>
-          <a ng-if='!ctrl.showWhenLoggedIn' ng-click="" class="" href="#" id="">Create Party</a>
+          <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="" href="#" id="">Add New Guest</a>
+          <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.toggleFindParty()" class="" href="#findParty" id="">Login</a>
+          <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.toggleCreate()" class="" href="#createFind" id="">Create Party</a>
         </div>
       </nav>
 
-      <div class="bg"></div>
+      <div class="bg">
+        <img src="https://i.imgur.com/G2ZxdW9.png" alt="Photo by Benjamin Sow on Unsplash">
+        <img src="https://i.imgur.com/dZzthwK.png" alt="Photo by Eaters Collective on Unsplash">
+        <img src="https://i.imgur.com/6neOJqh.png" alt="Photo by Sara Dubler on Unsplash">
+        <img src="https://i.imgur.com/QzKCBhC.png" alt="Photo by Eaters Collective on Unsplash">
+        <img src="https://i.imgur.com/hNBMLMW.png" alt="Photo by Sara Dubler on Unsplash">
+        <img src="https://i.imgur.com/e8ZmVkZ.png" alt="Photo by Sara Dubler on Unsplash">
+        <img src="https://i.imgur.com/aj7qjwb.png" alt="Photo by Eaters Collective on Unsplash">
+        <img src="https://i.imgur.com/QFvfnsZ.png" alt="Photo by Benjamin Sow on Unsplash">
+        <img src="https://i.imgur.com/NB8V8w1.png" alt="Photo by Benjamin Sow on Unsplash">
+      </div>
+      <!-- <button type="button" name="button" ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="button-primary"></button> -->
 
-      <!-- =-=-=-=-==-=-=- Create Party -=-=-=-=-=-==-=- -->
-      <div class="createFind">
+      <!-- =-=-=-=-==-=-=- Create User -=-=-=-=-=-==-=- -->
+      <div id="createFind" class="createFind">
         <div class="createParty" ng-hide="ctrl.showFindParty || ctrl.showWhenLoggedIn">
           <h3>Create a Party!</h3>
           <p>Don't let it happen where everyone brings potato salad... again! Signing up is quick and easy, and opens up a whole lot of party planning options!</p>
@@ -47,15 +58,15 @@
                   <label>Password</label>
                   <input class="u-full-width password" type="password" ng-model="ctrl.password" placeholder="password" required/>
                 </div>
-                <input class="button-primary" ng-click="ctrl.toggleCreate()" type="submit" value="Create User">
+                <input id="create" ng-click="ctrl.toggleCreate()" type="submit" value="Create User">
               </div>
             </div>
           </form>
         </div>
 
         <!-- -=-=-==-=-=-=-=-=- Find Party -=-=-=-==-=-=-=- -->
-        <div class="findParty" ng-hide="ctrl.showCreate || ctrl.showWhenLoggedIn">
-          <h3>Find a Party!</h3>
+        <div id="findParty" class="findParty" ng-hide="ctrl.showCreate || ctrl.showWhenLoggedIn">
+          <h3>Login or Find a Party!</h3>
           <p>Invited to a party? Enter the host's email and special password below and find their party page!</p>
           <button ng-if='!ctrl.showWhenLoggedIn'  ng-hide="ctrl.showFindParty" ng-click="ctrl.toggleFindParty()" class="create">Find a Party</button>
           <form class="username" ng-show="ctrl.showFindParty" ng-submit="ctrl.logIn()">
@@ -70,49 +81,174 @@
                   <label>Password</label>
                   <input class="u-full-width password" type="password" ng-model="ctrl.password" placeholder="password" required/>
                 </div>
-                <input class="button-primary" type="submit" value="Login">
+                <input id="find" type="submit" value="Login">
               </div>
             </div>
           </form>
         </div>
       </div>
 
+      <!-- -=-=-=-=-=-=-=-=-=- Party info box -=-=-=-=-=-=-=-=-=-=-== -->
+      <div id="partyBox" class="container" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' ng-hide="ctrl.showEdit || ctrl.showAddGuest">
+        <h2>Steve's 62nd Birthday Party!!!</h2>
+        <p>Hey, all! Yeah, I know my birthday isn't until the middle of January, but my bestie Rick is itchin to see if y'all wanna come and have a potluck party anyway! Whaddya think of that? SURVEY SAYS...!! Heh, see what I did there? Anyway, if you wanna come, put your name, what food you're bringing, and whatever else you think is important down below. See y'all there! Or not...</p>
+        <ul>
+          <li><span class="partyInfo">Date:</span>  Dec. 1st</li>
+          <li><span class="partyInfo">Time:</span>  2:34pm</li>
+          <li><span class="partyInfo">Location:</span>  Harvey Estate, Chicago</li>
+        </ul>
+
+      </div>
+
       <!-- =-=-=-=-=-=- View Guests -=-=-=-=-=- -->
-      <div class='guests' ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
+      <div id="view" class="view" ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
+        <div class="guests"  ng-hide="ctrl.showEdit || ctrl.showAddGuest">
           <img  class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest"><br>
           <li><label class="guestName">
             {{ guest.name }}<br><br>
           </label></li>
-
           <ul  class="infoList" >
             <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-              Food: {{ guest.food }}
+              <em>Food:</em> {{ guest.food }}
             </label></li>
             <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-              Recipe Link: <a href="{{ guest.recipeUrl }}" target="_blank">{{ guest.recipeUrl }}</a>
+              <em>Recipe Link:</em> <a href="{{ guest.recipeUrl }}" target="_blank">{{ guest.recipeUrl }}</a>
             </label></li>
             <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-              Need to use the oven? {{ guest.needOven ? 'Yes' : 'No'}}
-            </label></li>
-            <li><label style="width: 100%;" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-              How many people are coming with you? {{ guest.attendees }}
+              <em>Email:</em> {{ guest.email }}
             </label></li>
             <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-              Is it gluten-free? {{guest.glutenFree ? 'Yes' : 'No'}}
+              <em>Need to use the oven?</em> {{ guest.needOven ? 'Yes' : 'No'}}
             </label></li>
             <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
-              Is it peanut-free? {{guest.peanutFree ? 'Yes' : 'No'}}
+              <em>How many people are coming with you?</em> {{ guest.attendees }}
+            </label></li>
+            <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+              <em>Is it gluten-free?</em> {{guest.glutenFree ? 'Yes' : 'No'}}
+            </label></li>
+            <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
+              <em>Is it peanut-free?</em> {{guest.peanutFree ? 'Yes' : 'No'}}
             </label></li>
             <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="del" src="/assets/rubbish-bin.png" ng-click="ctrl.deleteGuest(guest)"/>
             <!-- <a class="del-edit" href="#" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' ng-click="ctrl.toggleEdit($index)"> -->
-              <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="edit" src="/assets/pencil-edit-button.png" ng-click="ctrl.toggleEdit($index)"/>
+              <img ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="edit" src="/assets/pencil-edit-button.png" ng-click="ctrl.toggleEdit($index, guest)"/>
             </a>
           </ul>
+        </div>
 
+      <!-- =-=-=-=-=-=-=-=-=-=-=- Edit Guests -=-=-=-=-=-=-==-=-=-=-= -->
+      <div class="edit-flex"  ng-if="$index === ctrl.indexOfEditFormShow">
+        <div class="editParty"  ng-show="ctrl.showEdit">
+          <h3>Edit Guest Profile</h3>
+          <form name="editForm" ng-submit="ctrl.editGuest(guest)" >
+            <div class="container">
+              <div class="row">
+                <div class="six columns">
+                  <label>Name</label>
+                  <input name="name" class="u-full-width" type="text" ng-model="ctrl.editedName" placeholder="{{guest.name}}" required/>
+                </div>
+                <div class="six columns close">
+                  <img class="closeButton" src="/assets/close.png" ng-click="ctrl.toggleEdit()" alt="">
+                  <label>Food To Bring</label>
+                  <input class="u-full-width" type="text" ng-model="ctrl.editedFood" placeholder="{{guest.food}}" required/>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="six columns"> -->
+                  <label>Link To Recipe</label>
+                  <input class="u-full-width" type="url" ng-model="ctrl.editedRecipeUrl" placeholder="{{guest.recipeUrl}}"/>
+                <!-- </div>
+                <div class="six columns"> -->
+                  <label>Profile Pic</label>
+                  <input class="u-full-width" type="url" ng-model="ctrl.editedProfilePic" placeholder=" {{guest.profilePic}}"/>
+                <!-- </div>
+              </div> -->
+              <label>No. of Guests</label>
+              <input class="u-full-width"type="number" ng-model="ctrl.editedAttendees" placeholder="{{guest.attendees}}"/>
+              <label>Email</label>
+              <input class="u-full-width"type="text" ng-model="ctrl.editedEmail" placeholder="{{guest.email}}"/>
+              <div class="row">
+                <div class="six columns">
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.editedNeedOven"/>
+                    <span class="label-body"> Need the Oven?</span>
+                  </label>
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.editedGlutenFree"/>
+                    <span class="label-body"> Gluten Free?</span>
+                  </label>
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.editedPeanutFree"/>
+                    <span class="label-body"> Peanut Free?</span>
+                  </label>
+                </div>
+              </div>
+              <input id="apply" type="submit" value="Apply Changes">
+            </div>
+          </form>
+        </div>
+      </div>
       </div>
 
 
+      <!-- =-=-=-=-===-=-=- Add new guest =-=-=-=-=-===-=-=- -->
+      <div class="create-flex"  >
+        <div class="createGuest"  ng-if="ctrl.showAddGuest">
+          <h3 >Add New Guest</h3>
+          <form ng-submit="ctrl.createGuest()">
+            <div class="container">
+              <div class="row">
+                <div class="six columns close">
+                  <img class="closeButton" src="/assets/close.png" ng-click="ctrl.toggleAddGuest()" alt="">
+                  <label>Enter Name</label>
+                  <input class="u-full-width" type="text" ng-model="ctrl.name" placeholder="Name" required/>
+                </div>
+                <div class="six columns">
+                  <label>Enter Food To Bring</label>
+                  <input class="u-full-width" type="text" ng-model="ctrl.food" placeholder="Food" required/>
+                </div>
+              </div>
+
+              <!-- <div class="row">
+                <div class="six columns"> -->
+                  <label>Link To Recipe</label>
+                  <input class="u-full-width" type="url" ng-model="ctrl.recipeUrl" placeholder="URL"/>
+                <!-- </div>
+                <div class="six columns"> -->
+                  <label>Profile Pic</label>
+                  <input class="u-full-width" type="url" ng-model="ctrl.profilePic" placeholder=" Profile Pic URL"/>
+                <!-- </div>
+              </div> -->
+
+              <label>No. of Guests</label>
+              <input class="u-full-width"type="number" ng-model="ctrl.attendees" placeholder="Number of guests"/>
+              <label>Add Contact Email</label>
+              <input class="u-full-width"type="text" ng-model="ctrl.email" placeholder="contact email"/>
+              <div class="row">
+                <div class="six columns">
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.needOven"/>
+                    <span class="label-body"> Need the Oven?</span>
+                  </label>
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.glutenFree"/>
+                    <span class="label-body"> Gluten Free?</span>
+                  </label>
+                  <label class="example-send-yourself-copy">
+                    <input type="checkbox" ng-model="ctrl.peanutFree"/>
+                    <span class="label-body"> Peanut Free?</span>
+                  </label>
+                </div>
+              </div>
+              <input id="apply" type="submit" value="Add Guest">
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+    <footer>
+      <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      <p>Created and Designed by Rick Christenhusz 2018</p>
+    </footer>
   </body>
 </html>

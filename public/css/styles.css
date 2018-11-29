@@ -13,13 +13,27 @@
   src: url('../fonts/BiggerLove-DEMO.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: "roadstar";
+  src: url('../fonts/KTF-Roadstar.ttf') format('truetype');
+}
+
 h1 {
-  font-family: "love", cursive;
-  letter-spacing: 5px;
-  color: rgb(223, 254, 232);
+  font-family: "roadstar", cursive;
+  letter-spacing: 3px;
+  color: white;
   text-shadow: 5px 2px 5px black;
   font-size: 50px;
   text-align: center;
+}
+
+h2 {
+  font-family: "love", cursive;
+  font-size: 40px;
+  text-align: center;
+  line-height: 50%;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 h3 {
@@ -27,7 +41,7 @@ h3 {
   text-align: center;
 }
 
-em {
+h1 > em {
   font-size: 70px;
   line-height: 100%;
 }
@@ -45,27 +59,29 @@ body {
   border-radius: 5px;
   padding-top: 10px;
   padding-bottom: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
   position: relative;
   top: 0;
   /* left: 50%;
   right: 50%; */
 }
 
-.bg {
+/* .bg {
   width: 95%;
-  height: 250px;
+  height: 300px;
   display: block;
   position: relative;
   z-index: 1;
   margin: 0 auto;
   margin-bottom: 50px;
 
-}
+} */
 
-.bg:after {
+/* .bg:after {
   content: "";
-  background: url('https://i.imgur.com/t9QcniW.jpg');
-  opacity: 0.8;
+  background-image: url('https://i.imgur.com/G2ZxdW9.png'), url('https://i.imgur.com/6neOJqh.png'); /* Photo by Craig Adderley from Pexels */
+  /* opacity: 1;
   top: 0;
   left: 0;
   bottom: 0;
@@ -74,6 +90,21 @@ body {
   z-index: -1;
   background-repeat: no-repeat;
   margin: 0;
+} */
+
+.bg {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: space-around;
+  margin-top: 5px;
+
+}
+
+.bg > img {
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid white;
 }
 
 a {
@@ -93,15 +124,16 @@ a {
   /* display: flex; */
   /* justify-content: space-between; */
   width: 100%;
-  background-color: rgb(223, 254, 232);
+  background-color: white;
   margin-bottom: 20px;
   text-decoration: none;
 }
 
 .createFind {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
 }
 
 .createParty, .findParty {
@@ -112,10 +144,40 @@ a {
     width: 35%;
     background-color: white;
     padding: 10px;
-    /* margin: 50px; */
+    margin-top: 20px;
 }
 
-.findInput {
+.editParty, .createGuest, #partyBox {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  border: 5px solid black;
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;
+  padding: 10px;
+  color: black;
+  margin-top: 20px;
+}
+
+.partyInfo {
+  font-family: "love", cursive;
+  font-size: 30px;
+  /* display: flex;
+  justify-content: center; */
+}
+
+#partyBox ul {
+  text-align: center;
+}
+
+.edit-flex, .create-flex {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
+
+.findInput, .close {
   display: relative;
 }
 
@@ -128,18 +190,38 @@ a {
   width: 10px;
 }
 
-.create {
+.create, #find, #create {
   margin-left: auto;
   margin-right: auto;
   background-color: rgb(128, 82, 16);
   color: white;
+}
 
+#find {
+  margin-left: 10rem;
+  background-color: rgb(128, 82, 16);
+  color: white;
+}
+
+#create {
+  margin-left: 7rem;
+  background-color: rgb(128, 82, 16);
+  color: white;
+}
+
+#apply {
+  background-color: rgb(128, 82, 16);
+  color: white;
 }
 
 .guests {
+  /* display: flex;
+  flex-flow: column wrap; */
+  background-color: white;
   position: relative;
   column-count: 3;
   width: 65%;
+  height: 170px;
   border: 5px solid black;
   border-radius: 5px;
   margin: 10px auto;
@@ -150,6 +232,14 @@ a {
   /* animation: mymove 5s 1; */
 }
 
+/* .infoList {
+  background-color: white;
+} */
+
+.guestName {
+  text-align: center;
+}
+
 .del {
   display: inline-block;
   position: absolute;
@@ -158,6 +248,7 @@ a {
   width: 20px;
   margin-right: 5px;
   margin-bottom: 5px;
+  /* z-index: 2; */
 }
 
 .edit {
@@ -168,6 +259,7 @@ a {
   width: 20px;
   margin-right: 5px;
   margin-bottom: 5px;
+  /* z-index: 2; */
 }
 
 .del:hover, .edit:hover, .closeButton:hover, .logout:hover {
@@ -187,11 +279,45 @@ li {
 }
 
 .profilePic {
-  margin: 10px 0 0 10px;
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
   width: 70px;
   border-radius: 20px;
+  margin-left: 60px;
 }
 
 .login {
   background-color: white;
+}
+
+.red {
+  color: red;
+}
+
+footer {
+  position: relative;
+  /* left: 3rem; */
+  color: white;
+  width: 100%;
+  background-color: black;
+  margin-top: 50px;
+  margin-bottom: 0;
+  /* padding: 0 30px; */
+}
+
+footer div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-left: 10px;
+  margin: 0;
+}
+
+footer p {
+  /* position: absolute; */
+  bottom: 0;
+  right: 1rem;
+  text-align: right;
+  padding-right: 10px;
+  margin: 0;
 }
