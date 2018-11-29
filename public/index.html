@@ -80,7 +80,7 @@
                   <label>Password</label>
                   <input class="u-full-width password" type="password" ng-model="ctrl.password" placeholder="password" required/>
                 </div>
-                <input class="button-primary" type="submit" value="Login">
+                <input id="create" type="submit" value="Login">
               </div>
             </div>
           </form>
@@ -88,13 +88,12 @@
       </div>
 
       <!-- =-=-=-=-=-=- View Guests -=-=-=-=-=- -->
-      <div class='view' ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
+      <div class="view" ng-repeat="guest in ctrl.guests" ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn'>
         <div class="guests"  ng-hide="ctrl.showEdit || ctrl.showAddGuest">
           <img  class="profilePic" src="{{ guest.profilePic }}" alt="pics of guest"><br>
           <li><label class="guestName">
             {{ guest.name }}<br><br>
           </label></li>
-
           <ul  class="infoList" >
             <li><label ng-if='ctrl.showInfo && ctrl.showWhenLoggedIn' class="">
               Food: {{ guest.food }}
@@ -132,7 +131,8 @@
                   <label>Name</label>
                   <input class="u-full-width" type="text" ng-model="ctrl.editedName" placeholder="{{guest.name}}" required/>
                 </div>
-                <div class="six columns">
+                <div class="six columns close">
+                  <img class="closeButton" src="/assets/close.png" ng-click="ctrl.toggleEdit()" alt="">
                   <label>Food To Bring</label>
                   <input class="u-full-width" type="text" ng-model="ctrl.food" placeholder="Food" required/>
                 </div>
@@ -169,7 +169,7 @@
                   </label>
                 </div>
               </div>
-              <input class="button-primary" type="submit" value="Apply Changes">
+              <input id="apply" type="submit" value="Apply Changes">
             </div>
           </form>
         </div>
@@ -184,7 +184,8 @@
           <form ng-submit="ctrl.createGuest()">
             <div class="container">
               <div class="row">
-                <div class="six columns">
+                <div class="six columns close">
+                  <img class="closeButton" src="/assets/close.png" ng-click="ctrl.toggleAddGuest()" alt="">
                   <label>Enter Name</label>
                   <input class="u-full-width" type="text" ng-model="ctrl.name" placeholder="Name" required/>
                 </div>
@@ -225,7 +226,7 @@
                   </label>
                 </div>
               </div>
-              <input class="button-primary" type="submit" value="Add Guest">
+              <input id="apply" type="submit" value="Add Guest">
             </div>
           </form>
         </div>

@@ -20,7 +20,7 @@
 
 h1 {
   font-family: "roadstar", cursive;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   color: rgb(223, 254, 232);
   text-shadow: 5px 2px 5px black;
   font-size: 50px;
@@ -32,7 +32,7 @@ h3 {
   text-align: center;
 }
 
-em {
+h1 > em {
   font-size: 70px;
   line-height: 100%;
 }
@@ -135,7 +135,7 @@ a {
     width: 35%;
     background-color: white;
     padding: 10px;
-    /* margin: 50px; */
+    margin-top: 20px;
 }
 
 .editParty, .createGuest {
@@ -157,7 +157,7 @@ a {
   color: black;
 }
 
-.findInput {
+.findInput, .close {
   display: relative;
 }
 
@@ -170,18 +170,31 @@ a {
   width: 10px;
 }
 
-.create {
+.create, #create {
   margin-left: auto;
   margin-right: auto;
   background-color: rgb(128, 82, 16);
   color: white;
+}
 
+#create {
+  margin-left: 10rem;
+  background-color: rgb(128, 82, 16);
+  color: white;
+}
+
+#apply {
+  background-color: rgb(128, 82, 16);
+  color: white;
 }
 
 .guests {
+  /* display: flex;
+  flex-flow: column wrap; */
   position: relative;
   column-count: 3;
   width: 65%;
+  height: 170px;
   border: 5px solid black;
   border-radius: 5px;
   margin: 10px auto;
@@ -192,6 +205,14 @@ a {
   /* animation: mymove 5s 1; */
 }
 
+/* .infoList {
+  background-color: white;
+} */
+
+.guestName {
+  text-align: center;
+}
+
 .del {
   display: inline-block;
   position: absolute;
@@ -200,6 +221,7 @@ a {
   width: 20px;
   margin-right: 5px;
   margin-bottom: 5px;
+  /* z-index: 2; */
 }
 
 .edit {
@@ -210,6 +232,7 @@ a {
   width: 20px;
   margin-right: 5px;
   margin-bottom: 5px;
+  /* z-index: 2; */
 }
 
 .del:hover, .edit:hover, .closeButton:hover, .logout:hover {
@@ -229,9 +252,11 @@ li {
 }
 
 .profilePic {
-  margin: 10px 0 0 10px;
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
   width: 70px;
   border-radius: 20px;
+  margin-left: 60px;
 }
 
 .login {
