@@ -6,6 +6,7 @@ An app for organizing a potluck party, with features such as letting guests stat
 * Express
 * AngularJS
 * Node.js
+(there's probably an acronym for that, but I don't know what)
 
 # Evolution of the site
 
