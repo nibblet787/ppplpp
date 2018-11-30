@@ -220,8 +220,8 @@ a {
   background-color: white;
   position: relative;
   column-count: 3;
-  width: 65%;
-  height: 170px;
+  width: 70%;
+  height: 195px;
   border: 5px solid black;
   border-radius: 5px;
   margin: 10px auto;
@@ -278,8 +278,14 @@ li {
     50% {box-shadow: 10px 20px 30px rgba(92, 91, 91, 1);}
 }
 
+.infoList {
+  border-left: 1px solid gray;
+  padding-left: 10px;
+}
+
 .profilePic {
-  margin-top: 10px;
+
+  margin-top: 15px;
   /* margin-bottom: 10px; */
   width: 70px;
   border-radius: 20px;

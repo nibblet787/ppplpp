@@ -21,7 +21,7 @@
           <a href="#view" class="" ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.viewGuests()">View Guests</a>
           <a href="mailto:rickchristenhusz@gmail.com" class="">Contact</a>
           <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.logout()" class="logout" id="">Logout</a>
-          <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="" href="#" id="">Add New Guest</a>
+          <a ng-if='ctrl.showWhenLoggedIn' ng-click="ctrl.toggleAddGuest()" class="" href="#createGuest" id="">Add New Guest</a>
           <a ng-if='!ctrl.showWhenLoggedIn'  ng-click="ctrl.toggleFindParty()" class="" href="#findParty" id="">Login</a>
           <a ng-if='!ctrl.showWhenLoggedIn' ng-click="ctrl.toggleCreate()" class="" href="#createFind" id="">Create Party</a>
         </div>
@@ -192,7 +192,7 @@
 
 
       <!-- =-=-=-=-===-=-=- Add new guest =-=-=-=-=-===-=-=- -->
-      <div class="create-flex"  >
+      <div id="createGuest" class="create-flex"  >
         <div class="createGuest"  ng-if="ctrl.showAddGuest">
           <h3 >Add New Guest</h3>
           <form ng-submit="ctrl.createGuest()">
